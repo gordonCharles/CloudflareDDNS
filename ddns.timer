@@ -1,5 +1,5 @@
 [Unit]
-Description=5 miinute restart timer for DDNS Client for Cloudflare
+Description=5 minute restart timer for DDNS Client for Cloudflare
 
 [Timer]
 OnCalendar=*-*-* *:00/5:05
