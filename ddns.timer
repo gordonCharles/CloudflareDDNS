@@ -1,0 +1,10 @@
+[Unit]
+Description=5 miinute restart timer for DDNS Client for Cloudflare
+
+[Timer]
+OnCalendar=*-*-* *:00/5:05
+OnBootSec=5
+Persistent=true
+
+[Install]
+WantedBy=timers.target

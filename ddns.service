@@ -1,0 +1,16 @@
+[Unit]
+Description=DDNS Client for Cloudflare
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u ddns.py --serviceMode
+WorkingDirectory=/home/gcharles/Software/Python/CloudflareDDNS
+StandardOutput=inherit
+StandardError=inherit
+Restart=on-failure
+RestartSec=300
+RuntimeMaxSec=350
+User=gcharles
+
+[Install]
+WantedBy=multi-user.target
