@@ -1,4 +1,4 @@
-#A python script for updating a the A records on list of domains on a cloudflare to support DDNS.
+# A python script for updating a the A records on list of domains on a cloudflare to support DDNS.
 
 `ddns.py` is intended to be run as a service at intervals to check for changes of the IP address of the server the service is running on.  If the IP address changes, the correspoding A records in Cloudflare will be updated.
 
@@ -15,7 +15,7 @@ If the reported IP address for the server does not match any of the cached value
 
 To support automation of the script, I've created a systemd service and corresponding timer.  For details see the following two sections.
 
-##Enabling initialization at boot (auto launch)
+## Enabling initialization at boot (auto launch)
 
 Edit values of `ExecStart` and `WorkingDirectory` in `ddns.service` to match your setup.
 
@@ -38,8 +38,7 @@ To have it start automatically on reboot by using this command:
 The systemctl command can also be used to restart the service or disable it
 
 
-
-##Enabling a timer to restart the service at regular intervals
+## Enabling a timer to restart the service at regular intervals
 
 Note the file prefix for the timer must match the prefix for the service.  The timer is setup for running every 5 minutes.
 
@@ -71,7 +70,7 @@ Example status from working system:
 > Mar 07 01:05:08 odroid python3[251334]: 200
 > Mar 07 01:05:08 odroid python3[251334]: <Response [200]>
 
-##Cloudflare docs:
+## Cloudflare docs:
 
 
 Query DNS records:
@@ -87,18 +86,18 @@ Some code and concept lifted from:
 
 [https://github.com/creimers/cloudflare-ddns]()
 
-##Python & Package Revisions:
+## Python & Package Revisions:
 
 Python 3.8.10
 
-##Testing:
+## Testing:
 
-###Python
+### Python
 The two Cloudfare interface calls are split and pretty easily isolated for testing; alhtough, they shouls just work.  The curl command in the comments of `ddns.py` is a simple method to test out your zone IDs and API Token.
 
-###systemd service
+### systemd service
 Once both the service and timer are running `systemctl status ddns.service` provides commpact but useful feedback on the state of the service including the time since it was last run.  A simple metric to use when bringing up the service is to delete `IP_Address_Cache.pkl` as it will be regenerated if deleted every time the service is run.
 
-###DNS propagation
+### DNS propagation
 It was acceptable and easisted for me to test the propagation by changing the DNS reecord through Cloudfare's web portal to an incorrect value and watch for the creation of `IP_Address_Cache.pkl` or the roll over of the timer from `systemctl status ddns.service` to check to see if the service correctly updated the A record.
 
