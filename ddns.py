@@ -174,6 +174,7 @@ def main():
         if current_ip != cached_ip_add[record_name][0]:
             record_id = cached_ip_add[record_name][1]
             set_ip(current_ip, zone_id, record_id, record_name)
+            cached_ip_add[record_name] = (current_ip, cached_ip_add[record_name][1])
             cache_updated = True
 
     if cache_updated == True:
